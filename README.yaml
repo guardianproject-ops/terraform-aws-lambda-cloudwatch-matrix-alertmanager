@@ -1,0 +1,45 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: terraform-aws-lambda-cloudwatch-matrix-alertmanager
+
+# License of this project
+license: "AGPL3"
+
+# Canonical GitLab repo
+gitlab_repo: guardianproject-ops/terraform-aws-lambda-cloudwatch-matrix-alertmanager
+
+# Badges to display
+badges: []
+
+# Short description of this project
+description: |-
+  This is a terraform module that forwards Cloudwatch Alarm SNS messages to [matrix-alertmanager](https://github.com/jaywink/matrix-alertmanager/)
+
+introduction: |-
+  Use this module to receive Cloudwatch alarms in your Matrix rooms.
+
+# How to use this project
+usage: |-
+
+  ```hcl
+  module "matrix_alertmanager" {
+    source          = "git::https://gitlab.com/guardianproject-ops/terraform-aws-lambda-cloudwatch-matrix-alertmanager.git?ref=master"
+
+    matrix_alertmanager_url      = "https://example.com?shared_secret=123"
+    matrix_alertmanager_receiver = "test-room"
+  }
+  ```
+
+include:
+  - "docs/terraform.md"
+
+# Contributors to this project
+contributors:
+  - name: "Abel Luck"
+    gitlab: "abelxluck"
+    gravatar: 0f605397e0ead93a68e1be26dc26481a

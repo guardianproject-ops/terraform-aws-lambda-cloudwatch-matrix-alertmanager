@@ -1,0 +1,8 @@
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - apt-get install make
+    - make test
