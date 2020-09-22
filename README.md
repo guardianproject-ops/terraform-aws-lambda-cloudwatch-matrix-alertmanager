@@ -96,6 +96,7 @@ module "matrix_alertmanager" {
 
 | Name | Version |
 |------|---------|
+| archive | ~> 1.3.0 |
 | aws | ~> 2.0 |
 | null | n/a |
 
@@ -117,6 +118,7 @@ module "matrix_alertmanager" {
 | name | Solution name, e.g. 'app' or 'jenkins' | `string` | n/a | yes |
 | namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | n/a | yes |
 | regex\_replace\_chars | Regex to replace chars with empty string in `namespace`, `environment`, `stage` and `name`.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | n/a | yes |
+| sns\_topic\_arns | List of sns\_topics that will be sending alarms to this lambda | `list(string)` | n/a | yes |
 | stage | Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | n/a | yes |
 | tags | Additional tags (e.g. `map('BusinessUnit','XYZ')` | `map(string)` | `{}` | no |
 
@@ -125,6 +127,8 @@ module "matrix_alertmanager" {
 | Name | Description |
 |------|-------------|
 | lambda | the lambda resource output |
+| lambda\_arn | the lambda resource's arn |
+| lambda\_qualified\_arn | the lambda resource's qualified arn |
 
 
 

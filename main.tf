@@ -10,6 +10,13 @@ resource "null_resource" "lambda" {
   }
 }
 
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/artifacts/lambda"
+  output_path = "${path.module}/artifacts/lambda-${null_resource.lambda.triggers.build_number}.zip"
+  depends_on  = [null_resource.lambda]
+}
+
 module "label_log" {
   source    = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.19.2"
   delimiter = "/"
@@ -84,11 +91,12 @@ resource "aws_lambda_function" "default" {
 }
 
 resource "aws_lambda_permission" "sns" {
+  count         = length(var.sns_topic_arns)
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.default.function_name
   principal     = "sns.amazonaws.com"
-  statement_id  = "${module.context.id}-AllowExecutionFromSNS"
-  source_arn    = var.sns_topic_arn
+  statement_id  = "${module.this.id}-AllowExecutionFromSNS-${count.index}"
+  source_arn    = element(var.sns_topic_arns, count.index)
 }
 
 resource "aws_lambda_alias" "default" {

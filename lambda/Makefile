@@ -4,7 +4,6 @@ ARTIFACTS ?= ../artifacts/lambda
 package: clean build
 	mkdir -p $(ARTIFACTS)
 	cp $(SOURCES) $(ARTIFACTS)
-	cd $(ARTIFACTS) && zip -r ../lambda-aws-cloudwatch-alertmanager-matrix.zip .
 
 build:
 	mkdir -p "${PWD}/package"
