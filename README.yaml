@@ -32,8 +32,14 @@ usage: |-
 
     matrix_alertmanager_url      = "https://example.com?shared_secret=123"
     matrix_alertmanager_receiver = "test-room"
+    sns_topic_arns               = [aws_sns_topic.warning.arn]
   }
   ```
+
+related:
+  - url: https://guardianproject-ops/terraform-aws-lambda-matrix-alertmanager
+    name: terraform-aws-lambda-matrix-alertmanager
+    description: Creates a lambda function running matrix-alertmanager
 
 include:
   - "docs/terraform.md"

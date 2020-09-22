@@ -84,6 +84,7 @@ module "matrix_alertmanager" {
 
   matrix_alertmanager_url      = "https://example.com?shared_secret=123"
   matrix_alertmanager_receiver = "test-room"
+  sns_topic_arns               = [aws_sns_topic.warning.arn]
 }
 ```
 
@@ -130,6 +131,21 @@ module "matrix_alertmanager" {
 | lambda\_arn | the lambda resource's arn |
 | lambda\_qualified\_arn | the lambda resource's qualified arn |
 
+
+
+
+## Share the Love 
+
+Like this project? Please give it a ★ on [GitLab](https://gitlab.com/guardianproject-ops/terraform-aws-lambda-cloudwatch-matrix-alertmanager)
+
+Are you using this project or any of our other projects? Let us know at [@guardianproject][twitter] or [email us directly][email]
+
+
+## Related Projects
+
+Check out these related projects.
+
+- [terraform-aws-lambda-matrix-alertmanager](https://guardianproject-ops/terraform-aws-lambda-matrix-alertmanager) - Creates a lambda function running matrix-alertmanager
 
 
 
