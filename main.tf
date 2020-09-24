@@ -17,14 +17,8 @@ data "archive_file" "lambda_zip" {
   depends_on  = [null_resource.lambda]
 }
 
-module "label_log" {
-  source    = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.19.2"
-  delimiter = "/"
-  context   = module.this.context
-}
-
 resource "aws_cloudwatch_log_group" "main" {
-  name              = "/aws/lambda/${module.label_log.id}"
+  name              = "/aws/lambda/${module.this.id}"
   retention_in_days = 14
 }
 
