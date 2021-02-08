@@ -1,3 +1,5 @@
+---
+image: registry.gitlab.com/guardianproject-ops/docker-python-node:python3.7-nodejs14
 stages:
   - test
 

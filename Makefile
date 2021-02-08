@@ -5,11 +5,3 @@ export README_DEPS ?=  docs/terraform.md
 ## Test the lambda
 test:
 	cd lambda && $(MAKE) test
-
-## Package the lambda deployment artifact
-artifact:
-	cd lambda && $(MAKE) package
-
-## Clean the project
-dist-clean:
-	rm -rf artifacts/lambda/* artifacts.zip

@@ -22,7 +22,7 @@ class TestLambda(unittest.TestCase):
             "OldStateValue": "INSUFFICIENT_DATA",
         }
         result = to_alertmanager(payload_in)
-        self.assertEquals(
+        self.assertEqual(
             result,
             {
                 "receiver": "test",
