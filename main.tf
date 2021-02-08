@@ -52,7 +52,8 @@ resource "aws_iam_role_policy_attachment" "lambda" {
 # Lambda resources
 
 module "label" {
-  source = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.19.2"
+  source  = "cloudposse/label/null"
+  version = "0.24.1" # requires Terraform >= 0.13.0
 
   context    = module.this.context
   attributes = ["lambda"]
