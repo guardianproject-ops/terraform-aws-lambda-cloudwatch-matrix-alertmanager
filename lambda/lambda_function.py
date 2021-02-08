@@ -1,13 +1,14 @@
-#!/usr/bin/python3.8
-import urllib3
 from urllib.parse import quote
 import json
 import os
+import requests
+from aws_lambda_powertools import Logger
 
-http = urllib3.PoolManager()
 
 MATRIX_ALERTMANAGER_URL = os.environ["MATRIX_ALERTMANAGER_URL"]
 MATRIX_ALERTMANAGER_RECEIVER = os.environ["MATRIX_ALERTMANAGER_RECEIVER"]
+
+logger = Logger()
 
 
 def to_alertmanager(message):
@@ -40,11 +41,13 @@ def to_alertmanager(message):
     }
 
 
+@logger.inject_lambda_context
 def lambda_handler(event, context):
+    logger.debug("event", extra={"event": event})
     url = MATRIX_ALERTMANAGER_URL
     message = json.loads(event["Records"][0]["Sns"]["Message"])
     payload = json.dumps(to_alertmanager(message)).encode("utf-8")
-    resp = http.request(
-        "POST", url, body=payload, headers={"Content-Type": "application/json"}
-    )
-    print({"message": message, "status_code": resp.status, "response": resp.data})
+    resp = requests.post(url, json=payload)
+    resp.raise_for_status()
+    logger.debug("response from matrix bot", {"reponse": resp.json()})
+    print({"message": message, "status_code": resp.status_code})

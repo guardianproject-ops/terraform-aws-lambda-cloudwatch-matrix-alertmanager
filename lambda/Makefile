@@ -1,4 +1,6 @@
 SOURCES = lambda_function.py
 
 test:
-	python3 -m unittest test.py
+	if [ -f ./venv/bin/activate ]; then . venv/bin/activate; fi \
+	&& pip install -r requirements.txt \
+	&& python3 -m unittest test.py
