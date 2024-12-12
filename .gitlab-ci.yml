@@ -1,10 +1,5 @@
 ---
-image: registry.gitlab.com/guardianproject-ops/docker-python-node:python3.7-nodejs14
-stages:
-  - test
-
-test:
-  stage: test
-  script:
-    - apt-get install make
-    - make test
+include:
+  - project: guardianproject-ops/projects
+    ref: main
+    file: terraform_templates/tf-module.gitlab-ci.yml
